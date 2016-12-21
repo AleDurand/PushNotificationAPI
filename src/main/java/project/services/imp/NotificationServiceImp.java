@@ -27,7 +27,7 @@ public class NotificationServiceImp implements NotificationService {
 	public String DEVICE_TOKEN;
 
 	@Value("${application.fcm_token}")
-	public String FCM_TOKEN = System.getProperty("application.fcm_token");
+	public String FCM_TOKEN;
 
 	public void sendPush(NotificationModel notification) {
 		try {
@@ -38,7 +38,7 @@ public class NotificationServiceImp implements NotificationService {
 			headers.setContentType(MediaType.APPLICATION_JSON);
 			HttpEntity<Object> entity = new HttpEntity<Object>(push, headers);
 			
-			restTemplate.exchange("https://fcm.googleapis.com/fcm/send", HttpMethod.POST,	entity, String.class);
+			restTemplate.exchange("https://fcm.googleapis.com/fcm/send", HttpMethod.POST, entity, String.class);
 			
 		} catch (RestClientException ex) {
 			throw new CustomException(ex.getMessage(), null);
