@@ -17,6 +17,7 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
@@ -41,7 +42,7 @@ public class Application extends SpringBootServletInitializer {
 	@Value("${http.proxyPassword}")
 	public String PROXY_PASSWORD;
 
-	@Value("${http.proxySet}")
+	@Value("${http.proxySet:false}")
 	public boolean PROXY_SET;
 
 	public static void main(String[] args) {
@@ -69,6 +70,14 @@ public class Application extends SpringBootServletInitializer {
 		builder.dateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ"));
 		builder.failOnUnknownProperties(false);
 		return builder;
+	}
+	
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+		PropertySourcesPlaceholderConfigurer p = new PropertySourcesPlaceholderConfigurer();
+		p.setIgnoreResourceNotFound(true);
+		p.setIgnoreUnresolvablePlaceholders(true);
+		return p;
 	}
 
 	@Bean
