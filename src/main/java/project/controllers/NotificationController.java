@@ -29,7 +29,7 @@ public class NotificationController {
 		notificationService.sendPush(notification);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
 		binder.setValidator(notificationValidator);

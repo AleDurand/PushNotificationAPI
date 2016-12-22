@@ -24,6 +24,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
 @Configuration
 @ComponentScan
@@ -50,8 +51,7 @@ public class Application extends SpringBootServletInitializer {
 	}
 
 	@Override
-	protected SpringApplicationBuilder configure(
-			SpringApplicationBuilder application) {
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(Application.class);
 	}
 
@@ -66,12 +66,13 @@ public class Application extends SpringBootServletInitializer {
 	@Bean
 	public Jackson2ObjectMapperBuilder jacksonBuilder() {
 		Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
+		builder.propertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
 		builder.serializationInclusion(Include.NON_NULL);
 		builder.dateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ"));
 		builder.failOnUnknownProperties(false);
 		return builder;
 	}
-	
+		
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		PropertySourcesPlaceholderConfigurer p = new PropertySourcesPlaceholderConfigurer();
@@ -100,7 +101,6 @@ public class Application extends SpringBootServletInitializer {
 		HttpClient httpClient = clientBuilder.build();
 		HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
 		factory.setHttpClient(httpClient);
-
 		return new RestTemplate(factory);
 	}
 
