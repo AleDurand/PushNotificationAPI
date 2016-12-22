@@ -10,28 +10,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import project.models.NotificationModel;
-import project.services.NotificationService;
-import project.validators.NotificationValidator;
+import project.models.MessageModel;
+import project.models.ResponseModel;
+import project.services.MessageService;
+import project.validators.MessageValidator;
 
 @RestController
-@RequestMapping(value = "/notifications")
-public class NotificationController {
+@RequestMapping(value = "/messages")
+public class MessageController {
 
 	@Autowired
-	private NotificationService notificationService;
+	private MessageService messageService;
 
 	@Autowired
-	private NotificationValidator notificationValidator;
+	private MessageValidator messageValidator;
 
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-	public ResponseEntity<Void> create(@Validated @RequestBody NotificationModel notification) {
-		notificationService.sendPush(notification);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	public ResponseEntity<ResponseModel> create(@Validated @RequestBody MessageModel message) {
+		ResponseModel toReturn = messageService.sendPush(message);
+		return new ResponseEntity<>(toReturn, HttpStatus.CREATED);
 	}
 
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
-		binder.setValidator(notificationValidator);
+		binder.setValidator(messageValidator);
 	}
 }

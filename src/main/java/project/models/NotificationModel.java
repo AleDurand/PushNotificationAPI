@@ -2,45 +2,33 @@ package project.models;
 
 public class NotificationModel {
 
-	private DataModel data;
-	private String to;
-	private String [] registrationIds;
-	private String condition;
+	private String title;
+	private String body;
 
 	public NotificationModel() {
 		super();
 	}
 
-	public DataModel getData() {
-		return data;
+	public NotificationModel(String title, String body) {
+		super();
+		this.title = title;
+		this.body = body;
 	}
 
-	public void setData(DataModel data) {
-		this.data = data;
+	public String getTitle() {
+		return title;
 	}
 
-	public String getTo() {
-		return to;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public void setTo(String to) {
-		this.to = to;
-	}
-	
-	public String[] getRegistrationIds() {
-		return registrationIds;
+	public String getBody() {
+		return body;
 	}
 
-	public void setRegistrationIds(String[] registrationIds) {
-		this.registrationIds = registrationIds;
+	public void setBody(String body) {
+		this.body = body;
 	}
 
-	public String getCondition() {
-		return condition;
-	}
-
-	public void setCondition(String condition) {
-		this.condition = condition;
-	}
-	
 }

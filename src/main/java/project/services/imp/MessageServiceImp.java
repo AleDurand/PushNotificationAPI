@@ -13,12 +13,13 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import project.exceptions.CustomException;
-import project.models.NotificationModel;
-import project.services.NotificationService;
+import project.models.MessageModel;
+import project.models.ResponseModel;
+import project.services.MessageService;
 
 @Service
 @PropertySource("file:src/main/resources/application.properties")
-public class NotificationServiceImp implements NotificationService {
+public class MessageServiceImp implements MessageService {
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -26,17 +27,15 @@ public class NotificationServiceImp implements NotificationService {
 	@Value("${application.fcm_token}")
 	public String FCM_TOKEN;
 
-	public void sendPush(NotificationModel notification) {
+	public ResponseModel sendPush(MessageModel message) {
 		try {
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Authorization", "key=" + FCM_TOKEN);
 			headers.setContentType(MediaType.APPLICATION_JSON);
-			HttpEntity<Object> entity = new HttpEntity<Object>(notification, headers);
-			ResponseEntity<String> object = restTemplate.exchange("https://fcm.googleapis.com/fcm/send", HttpMethod.POST, entity, String.class);
-			System.out.println(object.getStatusCode());
-			System.out.println(object.getBody());
+			HttpEntity<Object> entity = new HttpEntity<Object>(message, headers);
+			ResponseEntity<ResponseModel> response = restTemplate.exchange("https://fcm.googleapis.com/fcm/send", HttpMethod.POST, entity, ResponseModel.class);
+			return response.getBody();
 		} catch (RestClientException ex) {
-			ex.printStackTrace();
 			throw new CustomException(ex.getMessage(), null);
 		}
 	}
