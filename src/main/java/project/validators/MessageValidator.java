@@ -6,7 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import project.models.MessageModel;
+import project.models.request.MessageModel;
 
 @Component
 public class MessageValidator implements Validator {

@@ -13,8 +13,8 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import project.exceptions.CustomException;
-import project.models.MessageModel;
-import project.models.ResponseModel;
+import project.models.request.MessageModel;
+import project.models.response.ResponseModel;
 import project.services.MessageService;
 
 @Service

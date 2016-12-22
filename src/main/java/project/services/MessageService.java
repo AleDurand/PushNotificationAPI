@@ -1,7 +1,7 @@
 package project.services;
 
-import project.models.MessageModel;
-import project.models.ResponseModel;
+import project.models.request.MessageModel;
+import project.models.response.ResponseModel;
 
 public interface MessageService {
 

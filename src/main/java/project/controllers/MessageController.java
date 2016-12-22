@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import project.models.MessageModel;
-import project.models.ResponseModel;
+import project.models.request.MessageModel;
+import project.models.response.ResponseModel;
 import project.services.MessageService;
 import project.validators.MessageValidator;
 
