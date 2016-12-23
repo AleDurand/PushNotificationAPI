@@ -1,10 +1,10 @@
-package project.models.request;
+package project.models;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "discriminator", visible = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "discriminator", visible = true, defaultImpl = UnicastMessageModel.class)
 @JsonSubTypes({// @formatter:off
 	@Type(name = "UNICAST", value = UnicastMessageModel.class),
 	@Type(name = "MULTICAST", value = MulticastMessageModel.class) 

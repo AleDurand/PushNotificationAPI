@@ -1,10 +1,9 @@
 package project.services;
 
-import project.models.request.MessageModel;
-import project.models.response.ResponseModel;
+import project.models.MessageModel;
 
 public interface MessageService {
 
-	public ResponseModel sendPush(MessageModel notification);
+	public Object sendPush(MessageModel notification);
 
 }

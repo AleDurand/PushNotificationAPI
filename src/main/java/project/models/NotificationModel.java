@@ -1,4 +1,4 @@
-package project.models.request;
+package project.models;
 
 public class NotificationModel {
 

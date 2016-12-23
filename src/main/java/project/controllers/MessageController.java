@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import project.models.request.MessageModel;
-import project.models.response.ResponseModel;
+import project.models.MessageModel;
 import project.services.MessageService;
 import project.validators.MessageValidator;
 
@@ -26,8 +25,8 @@ public class MessageController {
 	private MessageValidator messageValidator;
 
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-	public ResponseEntity<ResponseModel> create(@Validated @RequestBody MessageModel message) {
-		ResponseModel toReturn = messageService.sendPush(message);
+	public ResponseEntity<Object> create(@Validated @RequestBody MessageModel message) {
+		Object toReturn = messageService.sendPush(message);
 		return new ResponseEntity<>(toReturn, HttpStatus.CREATED);
 	}
 

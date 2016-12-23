@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import project.models.request.NotificationModel;
+import project.models.NotificationModel;
 
 @Component
 public class NotificationValidator implements Validator {
